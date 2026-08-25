@@ -38,9 +38,15 @@ AI와 LLM을 활용해 **외부 리서치**와 **내부 장기기억**을 연결
 
 ## Experiments & lessons
 
-- Node.js 규칙 엔진에서 Rust 백테스트 엔진과 Python PPO·Optuna 파이프라인까지
-  두 세대의 암호화폐 퀀트 시스템을 만들었습니다. 비용 차감 후 유효한 알파를
-  확인하지 못해 실거래 전에 중단했고, 실패 원인과 검증 순서의 문제를 기록했습니다.
+- 두 세대의 암호화폐 퀀트 시스템을 개발했습니다. 첫 시스템은 Node.js로
+  다중 자산·다중 시간대 기술지표 규칙 엔진을 만들고, Rust 고속 백테스트와
+  walk-forward 검증을 거쳐 Python PPO 강화학습·Optuna HPO로 확장했습니다.
+  BTC·ETH·SOL·XRP의 가격뿐 아니라 funding, OI, long/short, 청산·거시 데이터를
+  수집하고 AWS·GCP에서 학습했습니다. 후속 시스템은 Python `asyncio`·SQLite·
+  `ccxt` 기반 비동기 수집, 277차원 feature registry, paper trading, Flask 운영
+  대시보드로 다시 설계했습니다. 두 시스템 모두 비용 차감 후 유효한 OOS 알파를
+  확인하지 못해 실거래 전에 중단했고, 과적합·데이터 편향·검증 순서 문제를
+  사후 분석으로 남겼습니다.
 - Vercel에 배포한 마케팅 웹사이트, Leaflet 기반 단일 파일 여행 플래너,
   디자인 시스템을 갖춘 트레이닝 앱 등 여러 웹·UX 프로토타입을 제작했습니다.
 
