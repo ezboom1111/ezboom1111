@@ -1,16 +1,32 @@
-## Hi there 👋
+# 이지범 · Lee Jibeom
 
-<!--
-**ezboom1111/ezboom1111** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+리서치 결과를 “그럴듯한 답”에서 끝내지 않고, 다시 확인할 수 있는 증거와
+실행 가능한 시스템으로 바꾸는 데 관심이 있습니다. 생성형 AI 에이전트를
+공동 작업자로 활용하되, 문제 정의·아키텍처·안전 경계·테스트·최종 검증은
+명시적인 기록과 실행 결과로 남깁니다.
 
-Here are some ideas to get you started:
+## Projects
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+| | [refcap](https://github.com/ezboom1111/refcap) | [Browser-Agent MCP Farm](https://github.com/ezboom1111/browser-agent-mcp-farm) |
+| --- | --- | --- |
+| 한 줄 설명 | 멀티소스 리서치의 출처·미해결 질문·가설·예측을 이어 주는 Python 증거 원장 | AI 에이전트가 본 웹 근거를 SHA-256과 인용 게이트로 검증·봉인하는 TypeScript MCP 서버 |
+| 핵심 문제 | 긴 조사에서 판단 근거와 다음 질문이 세션 사이에 유실됨 | 에이전트의 인용이 실제 캡처 바이트와 맞는지 재검증하기 어려움 |
+| 구현 | append-only ledger, resumable frontier, 로컬 미디어 추출, 반증 가능한 예측 루프 | 격리된 Playwright 컨텍스트, cite-or-fail claim gate, Merkle/Ed25519 증거 번들, MCP·CLI·HTTP 표면 |
+| 검증 | Python 3.9/3.12/3.13 CI, stdlib `unittest` 269개, 적대적 QA 코퍼스 | Ubuntu/Windows × Node 22/24 CI, 775개 테스트, 4종 smoke, 패키지·보안 게이트 |
+| 정직한 한계 | 인용문 존재와 바이트 불변성은 확인하지만 결론의 진실성은 보장하지 않음 | 증거의 내부 일관성은 검증하지만 캡처 생산자가 라이브 페이지를 충실히 담았는지는 보장하지 않음 |
+
+두 프로젝트는 하나를 둘로 나눈 구조입니다. `refcap`은 무엇을 조사했고 무엇이
+아직 비어 있는지 관리하며, farm은 그중 결론을 지탱하는 핵심 주장만 별도의
+변조 감지 가능한 증거 번들로 봉인합니다. 서로 직접 import하지 않아 수집·판단
+계층과 검증 계층을 교체할 수 있게 설계했습니다.
+
+## How I build
+
+- 먼저 실패 조건과 성공 기준을 적고, 테스트와 CI로 재현합니다.
+- 외부 페이지와 모델 출력은 지시가 아니라 검증할 데이터로 취급합니다.
+- 로그인·CAPTCHA·결제 우회처럼 넘지 않을 경계는 문서뿐 아니라 코드에 둡니다.
+- 과장된 기능 설명을 발견하면 숨기지 않고 문서와 구현을 함께 정정합니다.
+
+현재 관심사는 RAG와 에이전트 orchestration을 “데모가 돌아가는가”보다
+“근거·실패·인수인계를 다른 사람이 다시 검증할 수 있는가”의 관점에서
+설계하는 것입니다.
