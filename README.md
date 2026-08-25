@@ -6,23 +6,22 @@ AI와 LLM을 활용해 **외부 리서치**와 **내부 장기기억**을 연결
 구조를 탐구합니다.
 
 이 관심사를 프로토타입에만 두지 않고 실제 업무 시스템으로 연결해 왔습니다.
-회사 운영을 위한 CRM·ERP 플랫폼과 매출 데이터 제품, 프리랜서 비대면 업무
-배치 서비스, 브라우저 조작 기반 생성형 AI 콘텐츠 파이프라인을 구축했습니다.
-상업 프로젝트의 소스 코드와 업무 데이터는 공개하지 않습니다.
+비공개 업체를 위한 통합 운영·매출 시스템, 의료통역·번역 사업 `Aya`,
+브라우저 조작 기반 생성형 AI 콘텐츠 파이프라인을 구축했습니다. 상업 프로젝트의
+소스 코드와 업무 데이터는 공개하지 않습니다.
 
-공개 저장소에서는 그중 외부 리서치의 추적 가능성과 검증 가능성을 다룹니다.
-내부 장기기억 시스템은 현재 비공개로 개발하고 있습니다.
+개인적으로는 외부 리서치의 추적·검증 인프라와 이를 장기기억으로 연결하는
+`Lee Vault`를 함께 개발하고 있습니다.
 
 ## Selected systems
 
 | Area | What I built | Status |
 | --- | --- | --- |
-| AI research infrastructure | 멀티소스 조사 원장 `refcap`과 웹 근거 검증·봉인 서버 Browser-Agent MCP Farm | Public OSS |
-| Agent long-term memory | 대화에서 근거·결정·정정·결과를 축적하고 다음 작업에 회상시키는 개인 장기기억 시스템 | Private · in progress |
-| Business operations | CRM·ERP·근태·마케팅·지식관리·매출 흐름을 연결한 사내 운영 플랫폼 | Private · internal beta |
-| Sales intelligence | 서로 다른 3개 POS 데이터를 통합해 지표·근거·담당 행동을 연결한 운영 대시보드 | Private · in operation |
-| Remote workforce operations | 프리랜서 업무 접수→배치→수행 증거→정산 흐름을 상태 기반으로 관리하는 운영 콘솔 | Private · closed product |
-| Generative music delivery | Suno 웹 UI의 반복 작업을 브라우저 조작으로 자동화해 음악 100곡을 생성·전달 | Private · delivered |
+| Personal research infrastructure | 개인 리서치를 위해 만든 멀티소스 조사 원장 `refcap`과 웹 근거 검증·봉인 서버 Browser-Agent MCP Farm | Public OSS · personal |
+| Lee Vault | 외부 근거와 대화에서 나온 결정·정정·결과를 축적하고 다음 AI 작업에 회상시키는 개인 장기기억 시스템 | Private · personal · in progress |
+| Private company operations & sales | 동일 비공개 업체의 CRM·ERP·근태·마케팅·지식관리와 3개 POS의 API·수집 데이터를 연결해, 매출 지표→근거→담당 행동으로 이어지는 내부 운영·의사결정 시스템을 구축 | Private company · in operation & ongoing |
+| Aya · Interpretation & translation operations | 2025 한양대학교 캠퍼스타운 선정 당시 시작한 사업. 통역·번역 업무의 접수→프리랜서 배치→수행 증거→정산 흐름을 상태 기반으로 관리 | Private startup · ongoing |
+| Generative music client delivery | 비공개 업체 외주로 Suno 웹 UI의 반복 작업을 브라우저 조작으로 자동화해 음악 100곡을 생성·전달 | Private client work · delivered |
 
 ## Open source · Research infrastructure
 
@@ -31,10 +30,11 @@ AI와 LLM을 활용해 **외부 리서치**와 **내부 장기기억**을 연결
 | [refcap](https://github.com/ezboom1111/refcap) | 멀티소스 리서치의 출처·미해결 질문·가설·예측을 세션 사이에 이어 주는 Python 증거 원장 | Python 3.9/3.12/3.13 CI, stdlib `unittest` 269개 |
 | [Browser-Agent MCP Farm](https://github.com/ezboom1111/browser-agent-mcp-farm) | AI 에이전트가 본 웹 근거를 SHA-256으로 등록하고, 실제 바이트에 없는 인용을 거부하며, Merkle/Ed25519 증거 번들로 전달하는 TypeScript MCP 서버 | Ubuntu/Windows × Node 22/24 CI, 테스트 775개, 패키지·보안 게이트 |
 
-`refcap`은 무엇을 조사했고 무엇이 아직 비어 있는지를 관리합니다. Farm은 그중
-결론을 지탱하는 핵심 주장만 변조 감지 가능한 증거로 봉인합니다. 두 프로젝트는
-직접 의존하지 않도록 분리해 수집·판단 계층과 검증 계층을 독립적으로 교체할
-수 있게 설계했습니다.
+두 공개 프로젝트는 제 개인 리서치에서 먼저 쓰기 위해 만들었습니다. `refcap`은
+무엇을 조사했고 무엇이 아직 비어 있는지를 관리하고, Farm은 그중 결론을
+지탱하는 핵심 주장만 변조 감지 가능한 증거로 봉인합니다. 검증된 결과는 비공개
+장기기억 시스템인 `Lee Vault`의 다음 판단에 활용됩니다. 각 계층은 직접 의존하지
+않도록 분리해 독립적으로 교체할 수 있게 설계했습니다.
 
 ## Experiments & lessons
 
@@ -49,7 +49,7 @@ AI와 LLM을 활용해 **외부 리서치**와 **내부 장기기억**을 연결
 ### Founder / personal
 
 - 2024 · 성균관대학교 캠퍼스타운 선정·입주
-- 2025 · 한양대학교 캠퍼스타운 선정·입주
+- 2025 · `Aya`로 한양대학교 캠퍼스타운 선정·입주
 - 2025 · 개인사업 창업자로서 예비창업패키지·신사업창업사관학교 등 사업 서류 선정
 - 2026 · 부산대학교 「모두의창업」 1기 선정
 
